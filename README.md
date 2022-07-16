@@ -590,3 +590,128 @@ useEffect(() => {
   getSearchedMovies(searchWithQueryURL);
 }, [query]);
 ```
+
+## Estruturando a pagina de Movie.jsx
+
+> Importando useState useEffect useParams e os icones
+
+```jsx
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import {
+  BsGraphUp,
+  BsWallet2,
+  BsHourglassSplit,
+  BsFillFileEarmarkTextFill,
+} from "react-icons/bs";
+```
+
+> criamos um arquivo movie.sass e importamos ele
+
+```jsx
+import "../styles/pages/movie.sass";
+```
+
+> importamos nosso MovieCard
+
+```jsx
+import { MovieCard } from "../components/MoviesCard";
+```
+
+> importamos nossa variáveis a URL
+
+```jsx
+const moviesURL = import.meta.env.VITE_API;
+const apiKey = import.meta.env.VITE_API_KEY;
+```
+
+> Criamos uma funcao Movie
+
+export const Movie = () => {
+
+> Usamos o useParams e pegamos o id que vem pela url
+
+const { id } = useParams();
+
+> Criamos o estado dos filmes
+
+const [movie, setMovie] = useState(null);
+
+> Criamos uma funcao que pega os filmes
+
+const getMovie = async (url) => {
+
+> Pegamos usando o fetch
+
+const res = await fetch(url);
+
+> pegamos o res e passamos a funcao json
+
+const data = await res.json();
+
+> Setamos a data no estado setMovie
+
+    setMovie(data);
+
+};
+
+> Criamos uma funcao que transforma o numero em dolar
+
+const FormatCurrency = (number) => {
+return number.toLocaleString("en-US", {
+style: "currency",
+currency: "USD",
+});
+};
+
+> passamos o estado para a funcao useEffect
+
+useEffect(() => {
+
+> criamos uma variavel que pega a url o id e passamo a chave key bele
+
+const movieUrl = `${moviesURL}${id}?${apiKey}`;
+
+> passamo a funcao com a url
+
+getMovie(movieUrl);
+}, []);
+
+> criamos o JSX do movie
+
+```jsx
+return (
+  <div>
+    {movie && (
+      <>
+        <MovieCard movie={movie} showLink={false} />
+        <p className="tagline">{movie.tagline}</p>
+        <div className="info">
+          <h3>
+            <BsWallet2 /> Orçamento:
+          </h3>
+          <p>{FormatCurrency(movie.budget)}</p>
+        </div>
+        <div className="info">
+          <h3>
+            <BsGraphUp /> Receita:
+          </h3>
+          <p>{FormatCurrency(movie.revenue)}</p>
+        </div>
+        <div className="info">
+          <h3>
+            <BsHourglassSplit /> Duração:
+          </h3>
+          <p>{movie.runtime} minutos </p>
+        </div>
+        <div className="info description">
+          <h3>
+            <BsFillFileEarmarkTextFill /> Descrição
+          </h3>
+          <p>{movie.overview}</p>
+        </div>
+      </>
+    )}
+  </div>
+);
+```
