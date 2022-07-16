@@ -104,4 +104,71 @@ App.jsx
 <Outlet />
 ```
 
+## Criando os componentes
 
+src/components/Navbar.jsx
+
+> Cortamos a navbar que criamos no App.jsx e colamos no Navbar.jsx
+
+Navbar.jsx
+
+```jsx
+import { Link } from "react-router-dom";
+
+export const Navbar = () => {
+  return (
+    <nav id="navbar">
+      <h2>
+        <Link to="/">moviesLib</Link>
+      </h2>
+      <Link to="/movie/1">Movie</Link>
+      <Link to="/search">Search</Link>
+    </nav>
+  );
+};
+```
+
+> Importamos a Navbar.jsx no app.jsx
+
+```jsx
+function App() {
+  return (
+    <div className="App">
+      <Navbar />
+      <h2>Movie lib</h2>
+      <Outlet />
+    </div>
+  );
+}
+
+export default App;
+```
+
+> Estruturando o navbar
+
+Navbar.jsx
+
+```jsx
+import { Link } from "react-router-dom";
+import { BiCameraMovie, BiSearchAlt2 } from "react-icons/bi";
+
+export const Navbar = () => {
+  return (
+    <nav id="navbar">
+      <h2>
+        <Link to="/">
+          <BiCameraMovie />
+        </Link>
+      </h2>
+      <form>
+        <input type="text" placeholder="Busque um filme" />
+        <button type="submit">
+          <BiSearchAlt2 />
+        </button>
+      </form>
+    </nav>
+  );
+};
+```
+
+## Estilizando a Navbar
