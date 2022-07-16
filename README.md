@@ -171,4 +171,36 @@ export const Navbar = () => {
 };
 ```
 
-## Estilizando a Navbar
+## Estilizando o projeto
+
+> Decidi usar o sass para dar continuidade no nosso projeto feito com sass
+
+> criando pasta styles
+
+> criando arquivos
+> styles/main.sass
+> styles/mixins.sass
+> styles/variables.sass
+
+> Colocando estilos default no projeto
+> main.sass
+
+```sass
+*
+ font-family: "Helvetica"
+ margin: 0
+ padding: 0
+ box-sizing: border-box
+
+body
+ background-color: #000
+
+a ,svg
+ text-decoration: none
+ color: #f7d354
+ transition: .5s
+
+ &:hover
+   color: #b8930c
+
+```
