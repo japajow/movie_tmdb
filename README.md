@@ -715,3 +715,58 @@ return (
   </div>
 );
 ```
+
+## Estilizando movie.sass
+
+```sass
+@use '../variables'
+@use '../mixins'
+
+.movie-page
+  color: #fff
+  display: flex
+  flex-direction: column
+  max-width: 600px
+  margin: 2rem auto
+
+  svg
+    font-size: 1.5rem
+    color: variables.$bg-color-yellow
+
+  .movie-card
+    text-align: center
+
+    img, h2, p
+      margin-bottom: 1rem
+
+  .movie-card h2
+    font-size: 2rem
+  .movie-card p
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: .4rem
+
+.tagline
+  text-align: center
+  font-size: 1.3rem
+  margin-bottom: 2rem
+
+.info
+  margin-bottom: 1.5rem
+
+  h3
+    margin-bottom: 1rem
+    display: flex
+    align-items: center
+    gap: .5rem
+
+.description
+  padding-bottom: 15rem
+
+  p
+   line-height: 1.4rem
+
+
+```
+## FIM
