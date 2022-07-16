@@ -472,4 +472,49 @@ mixins.sass
 
 ```
 
+## Fazendo a parte de pesquisa
 
+Navbar.jsx
+
+> Criamos o estado do search
+
+```tsx
+const [search, setSearch] = useState("");
+```
+
+> Criamos uma variavel que navega para tal pagina
+
+```jsx
+const navigate = useNavigate();
+```
+
+> Criamos uma funcao que pega o submit do formulário
+> passamos evento preventDefault para nao carregar a pagina
+> Passamos um if se nao houver valor no search nao faz nada
+> Passamos na funcao navigate a Url com o valor pesquisado o input
+> Limpamos a variavel do estado search
+
+```jsx
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (!search) return;
+
+  navigate(`/search?q=${search}`);
+  setSearch("");
+};
+```
+
+> Passamos onChange e setando o valor colocado no input
+> colocamos um value nele o estado search para limparmos o input
+
+```jsx
+<input
+  type="text"
+  placeholder="Busque um filme"
+  onChange={(e) => setSearch(e.target.value)}
+  value={search}
+/>
+```
+
+## Agora vamos criar a pagina do search
