@@ -204,3 +204,81 @@ a ,svg
    color: #b8930c
 
 ```
+
+## ESTRUTURANDO A HOME
+
+> importando os hooks State e useEffect
+
+```jsx
+import { State, useEffect } from "react";
+```
+
+> importando as variáveis
+
+```jsx
+const moviesURL = import.meta.env.VITE_API;
+const apiKey = import.meta.env.VITE_API_KEY;
+```
+
+> Criamos os estados do movie
+
+```jsx
+const [topMovies, setTopMovies] = useState([]);
+```
+
+> Criamos uma funcao que pega os dados usando fetch async await
+
+```jsx
+const getTopRatedMovies = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+};
+```
+
+> Usamos o useEffect para quando os dados estiverem prontos exibimos ele
+
+```jsx
+useEffect(() => {
+  const topRatedURL = `${moviesURL}top_rated?${apiKey}`;
+
+  // Passamos o getTopRatedMovies passando a URL
+  getTopRatedMovies(topRatedURL);
+}, []);
+```
+
+> Passamos o setTopMovies a data.results
+> Assim preenchemos os dados dos filmes no topMovies
+
+```jsx
+const getTopRatedMovies = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  setTopMovies(data.results);
+};
+```
+
+> Imprimir os filmes fazendo um looping em um componente
+> testando se vem os nomes dos filmes
+
+```jsx
+return (
+  <div>{topMovies && topMovies.map((movie) => <h2>{movie.title}</h2>)}</div>
+);
+```
+
+> Estruturando a Home
+
+```jsx
+return (
+  <div className="container">
+    <h2 className="title">Melhores files:</h2>
+    <div className="movies-container">
+      {topMovies.length == 0 && <p>Carregando...</p>}
+      {topMovies.length > 0 && topMovies.map((movie) => <h2>{movie.title}</h2>)}
+    </div>
+  </div>
+);
+```
+
+## Criando o componente de filmes
