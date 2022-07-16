@@ -282,3 +282,50 @@ return (
 ```
 
 ## Criando o componente de filmes
+
+> Importamos o Link e o icone FaStar
+
+```tsx
+import { Link } from "react-router-dom";
+
+import { FaStar } from "react-icons/fa";
+```
+
+> importamos a variavel que pega a url da imagem
+
+```tsx
+const imageURL = import.meta.env.VITE_IMG;
+```
+
+> Passamos os parâmetros que vamos utilizar
+
+```tsx
+export const MovieCard = ({ movie, showLink = true }) => {
+  return <div>MovieCard</div>;
+};
+```
+
+> Estruturando o JSX da Home
+
+```tsx
+export const MovieCard = ({ movie, showLink = true }) => {
+  return (
+    <div className="movie-card">
+      // passamos a URL da imagem concatenando como movie.poster_path
+      <img src={imageURL + movie.poster_path} alt={movie.title} />
+      // Passamos o titulo
+      <h2>{movie.title}</h2>
+      <p>
+        //Chamamos o ícone
+        <FaStar />
+        // Passamos a pontuação
+        {movie.vote_average}
+      </p>
+      // Caso o Tiver o link mostramos o botão
+      {showLink && <Link to={`/movie/${movie.id}`}>Detalhes</Link>}
+    </div>
+  );
+};
+```
+
+
