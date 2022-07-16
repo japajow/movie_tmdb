@@ -387,4 +387,89 @@ Home.jsx
 
 ```
 
+## Estilizando o moviegrid.sass
+
+> Importamos o moviegrid.sass na Home.jsx
+
+```jsx
+import "../styles/pages/moviegrid.sass";
+```
+
+> Criamos o mixin para o button
+
+mixins.sass
+
+```sass
+
+@use './variables'
+
+@mixin button
+  background-color: variables.$bg-color-yellow
+  border: 2px solid variables.$bg-color-yellow
+  border-radius: 4px
+  color: #000 !important
+  padding: .3rem
+  font-size: 1.3rem
+  display: flex
+  align-items: center
+  cursor: pointer
+  transition: .4s
+
+  &:hover
+    background-color: transparent
+    svg
+      color: variables.$bg-color-yellow
+```
+
+> Estilização do moviegrid.sass
+
+```sass
+@use '../variables'
+@use '../mixins'
+
+.container .title
+  color: #fff
+  font-size: 2.5rem
+  text-align: center
+  margin: 2rem 0 1rem
+
+.title .query-text
+  color: variables.$bg-color-yellow
+
+.movies-container
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+  padding: 2rem
+  max-width: 1200px
+  margin: 0 auto
+  text-align: center
+
+  div
+    width: 30%
+    color: #fff
+    margin-bottom: 2.5rem
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    background-color: #111
+    padding: 1rem
+
+  svg
+    color: variables.$bg-color-yellow
+  img
+    max-width: 100%
+  img,h2,p
+    margin-bottom: 1rem
+  a
+    @include mixins.button
+    padding: 1rem .5rem
+    text-align: center
+
+    &:hover
+      color: variables.$bg-color-yellow
+
+
+```
+
 

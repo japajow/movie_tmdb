@@ -4,6 +4,8 @@ import { MovieCard } from "../components/MoviesCard";
 const moviesURL = import.meta.env.VITE_API;
 const apiKey = import.meta.env.VITE_API_KEY;
 
+import "../styles/pages/moviegrid.sass";
+
 export const Home = () => {
   const [topMovies, setTopMovies] = useState([]);
 

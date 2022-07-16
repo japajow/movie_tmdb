@@ -9,6 +9,7 @@ import { Search } from "./pages/Search";
 
 import "./styles/main.sass";
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
