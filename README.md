@@ -328,4 +328,63 @@ export const MovieCard = ({ movie, showLink = true }) => {
 };
 ```
 
+## Passando o componente Movie na Home
+
+Home.jsx
+
+```tsx
+{
+  topMovies.length > 0 &&
+    topMovies.map((movie) => <MovieCard movie={movie} key={movie.id} />);
+}
+```
+
+> Estilizando a Home
+
+> Criamos o styles/components/arquivo navbar.sass
+
+```sass
+@use '../variables'
+@use '../mixins'
+
+#navbar
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 1rem 2rem
+  background-color: #121212
+
+  h2 a
+    display: flex
+    align-items: center
+    gap: .5rem
+
+  form
+    display: flex
+    gap: .5rem
+
+  input
+    padding: .2rem .8rem
+    border-radius: 4px
+    border: none
+
+  button
+    background-color: variables.$bg-color-yellow
+    border: 2px solid variables.$bg-color-yellow
+    border-radius: 4px
+    color: #000 !important
+    padding: .3rem
+    font-size: 1.3rem
+    display: flex
+    align-items: center
+    cursor: pointer
+    transition: .4s
+
+    &:hover
+      background-color: transparent
+      svg
+        color: variables.$bg-color-yellow
+
+```
+
 
