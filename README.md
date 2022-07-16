@@ -518,3 +518,75 @@ const handleSubmit = (e) => {
 ```
 
 ## Agora vamos criar a pagina do search
+
+> Copiamos o JSX da Home e modificamos
+
+```jsx
+<div className="container">
+  <h2 className="title">
+    // mudamos o titulo e passamos a query Resultados para:{" "}
+    <span className="query-text">{query}</span>
+  </h2>
+  <div className="movies-container">
+    // mudamos o nome para movies
+    {movies.length == 0 && <p>Carregando...</p>}
+    {movies.length > 0 &&
+      movies.map((movie) => <MovieCard movie={movie} key={movie.id} />)}
+  </div>
+</div>
+```
+
+> importamos os estados
+> importamos o useSearchParams para pegar pela url
+> importamos o componente MoviesCard
+> Pegamos as variáveis VITE_SEARCH e VITE_API_KEY e passamo em uma variavel
+
+```jsx
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { MovieCard } from "../components/MoviesCard";
+
+const searchURL = import.meta.env.VITE_SEARCH;
+const apiKey = import.meta.env.VITE_API_KEY;
+```
+
+> importamos o estilo moviegrid.sass
+
+```jsx
+import "../styles/pages/moviegrid.sass";
+```
+
+> Criamos uma variavel destruturando ela usando useSearchParams
+
+```jsx
+const [searchParams] = useSearchParams();
+```
+
+> Criamos o estado do movies
+
+```tsx
+const [movies, setMovies] = useState([]);
+```
+
+> criamos uma variavel para pegar a variavel da url
+
+```jsx
+const query = searchParams.get("q");
+```
+
+> Copiamos da Home a funcao que pega os filmes e modificamos ela
+
+```jsx
+const getSearchedMovies = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  setMovies(data.results);
+};
+
+useEffect(() => {
+  const searchWithQueryURL = `${searchURL}?${apiKey}&query=${query}`;
+
+  getSearchedMovies(searchWithQueryURL);
+}, [query]);
+```
